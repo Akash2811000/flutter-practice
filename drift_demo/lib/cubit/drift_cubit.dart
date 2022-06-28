@@ -12,32 +12,66 @@ import 'package:meta/meta.dart';
 part 'drift_state.dart';
 
 class DriftCubit extends Cubit<DriftState> {
-  DriftCubit(this.appDatabase) : super(DriftInitial());
-  final AppDatabase appDatabase;
-  Future<Either<Failure, void>?>? addEmployeeEntities() async {
-    try {
-      print("calling");
-      var jsonText = await rootBundle.loadString('assets/employee.json');
-      Map<String, dynamic> map = json.decode(jsonText);
-      List<dynamic> data = map["auditEntity"];
-      List<EmployeesEntities> subList = data.map((e) => EmployeesEntities.fromJson(e)).toList();
-      List<EmployeeTableCompanion> list = [];
+  DriftCubit() : super(DriftInitial());
+  AppDatabase appDatabase = AppDatabase();
+  Future<void> addEmployeeEntities() async {
+    // try {
 
-      for (var element in subList) {
-        final data = EmployeeTableCompanion.insert(
-          employeeId: Value(element.employeeId),
-          employeeName: Value(element.employeeName),
-          employeeSalary: Value(element.employeeSalary),
-          employeeJoiningDate: Value(element.employeeJoiningDate),
-        );
-        list.add(data);
-        print(list);
-      }
-      final add = await appDatabase.employeeDao.insertEmployee(list);
-      return Right(add);
-    } catch (e) {
-      return Left(LocalFailure());
+    print("calling");
+    var jsonText = await rootBundle.loadString('assets/employee.json');
+    Map<String, dynamic> map = json.decode(jsonText);
+    List<dynamic> data = map["auditEntity"];
+
+    List<EmployeesEntities> subList =
+        data.map((e) => EmployeesEntities.fromJson(e)).toList();
+
+    List<EmployeeTableCompanion> list = [];
+    print(subList);
+    for (var element in subList) {
+      print('hii');
+      print(element.employeeName);
+      // print("this is $element");
+      final d = EmployeeTableCompanion.insert(
+        employeeId: Value(element.employeeId),
+        employeeName: Value(element.employeeName),
+        employeeSalary: Value(element.employeeSalary),
+        employeeJoiningDate: Value(element.employeeJoiningDate),
+      );
+      print('This is data $d');
+      list.add(d);
+      print("this is list $list");
     }
+    final add = await appDatabase.employeeDao.insertEmployee(list);
+    emit(DriftSucess());
+
+    // } catch (e) {
+    //
+    // }
   }
+
+  Future<List<Employee>> getData() async {
+    // try{
+    List<Employee> get = await appDatabase.employeeDao.watchAllEmployee();
+    emit(DriftSucess());
+    return get;
+    // }on Exception{
+    //  emit(EmpInsFail());
+    //  return ;
+    // }
+  }
+
+
+  void deletedata (Employee e) async {
+    final delete = await appDatabase.employeeDao.deleteEmployee(e);
+    emit(DriftSucess());
+  }
+
+  void updateEmployeeEntities(Employee e) async {
+    final update = await appDatabase.employeeDao
+        .updateEmployee(e);
+    emit(DriftSucess());
+  }
+
+
 
 }

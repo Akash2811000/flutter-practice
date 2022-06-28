@@ -1,6 +1,6 @@
-import 'package:equatable/equatable.dart';
 
-class EmployeesEntities extends Equatable {
+
+class EmployeesEntities {
   final int? employeeId;
   final String? employeeName;
   final int? employeeSalary;
@@ -22,13 +22,12 @@ class EmployeesEntities extends Equatable {
 
 
   Map<String, dynamic> toJson() => {
-    "EmployeeId": employeeId,
-    "EmployeeName": employeeName,
-    "EmployeeSalary": employeeSalary,
-    "EmployeeJoiningDate": employeeJoiningDate,
+    "EmployeeId": employeeId ?? 0,
+    "EmployeeName": employeeName ?? '',
+    "EmployeeSalary": employeeSalary ?? 0,
+    "EmployeeJoiningDate": employeeJoiningDate ?? '',
   };
 
 
-  @override
-  List<Object?> get props => [employeeId!, employeeName!, employeeSalary!, employeeJoiningDate!];
+
 }

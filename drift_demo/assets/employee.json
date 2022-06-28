@@ -1,17 +1,17 @@
 {
   "auditEntity" : [
     {
-      "employeeId": 123,
-      "employeeName" : "xyz",
-      "employeeSalary": 2000,
-      "employeeJoiningDate": "2021-11-15T11:29:03"
+      "EmployeeId": 123,
+      "EmployeeName" : "xyz",
+      "EmployeeSalary": 2000,
+      "EmployeeJoiningDate": "2021-11-15T11:29:03"
 
     },
     {
-      "employeeId": 124,
-      "employeeName" : "abc",
-      "employeeSalary": 4000,
-      "employeeJoiningDate": "2021-11-15T11:29:03"
+      "EmployeeId": 124,
+      "EmployeeName" : "abc",
+      "EmployeeSalary": 4000,
+      "EmployeeJoiningDate": "2021-11-15T11:29:03"
 
     }
   ]

@@ -1,4 +1,5 @@
 import 'package:drift_demo/cubit/drift_cubit.dart';
+import 'package:drift_demo/pages/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,13 +35,4 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomepage extends StatelessWidget {
-  const MyHomepage({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(child: Text('insert'), onPressed: () {
-      context.read<DriftCubit>().addEmployeeEntities();
-    },);
-  }
-}

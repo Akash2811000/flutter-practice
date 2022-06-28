@@ -5,6 +5,7 @@ import 'package:drift/native.dart';
 import 'package:drift_demo/dao/employee_dao.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 
 
 part 'drift_database.g.dart';
@@ -22,18 +23,18 @@ class EmployeeTable extends Table {
 
 @DriftDatabase(tables: [EmployeeTable], daos: [EmployeeDao])
 class AppDatabase extends _$AppDatabase {
-  AppDatabase(QueryExecutor e)
-      : super(e);
+  AppDatabase()
+      : super(_openConnection());
 
   @override
   int get schemaVersion => 1;
 
 }
 
-LazyDatabase openConnection() {
+LazyDatabase _openConnection() {
   return LazyDatabase(() async {
-    final dbFolder = await getDatabasesPath();
-    final file = File(p.join(dbFolder, 'employeedb.sqlite'));
+    final dbFolder = await getApplicationDocumentsDirectory();
+    final file = File(p.join(dbFolder.path, 'employee.db'));
     return NativeDatabase(file);
   });
 }

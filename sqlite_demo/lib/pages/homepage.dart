@@ -8,8 +8,7 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _name = TextEditingController();
-    TextEditingController _quantity = TextEditingController();
+
 
     return Scaffold(
       backgroundColor: Colors.lightBlue[50],
@@ -162,10 +161,57 @@ class MyHomePage extends StatelessWidget {
           child: const Icon(Icons.add),
           onPressed: () {
             print('click');
-            showDialog(
-                context: context,
-                builder: (BuildContext context2) {
-                  return AlertDialog(
+            _displayDialog(context);
+
+
+            // showDialog(
+            //     context: context,
+            //     builder: (BuildContext context2) {
+            //       return AlertDialog(
+            //         title: const Text('TextField AlertDemo'),
+            //         content: Column(
+            //           mainAxisSize: MainAxisSize.min,
+            //           children: [
+            //             TextField(
+            //               controller: _name,
+            //               decoration: const InputDecoration(hintText: "Name"),
+            //             ),
+            //             TextField(
+            //               controller: _quantity,
+            //               decoration:
+            //                   const InputDecoration(hintText: "Quantity"),
+            //             ),
+            //           ],
+            //         ),
+            //         actions: <Widget>[
+            //           ElevatedButton(
+            //             child: const Text('SUBMIT'),
+            //             onPressed: () {
+            //               Model objModel = Model(
+            //                   fruitName: _name.text, quantity: _quantity.text);
+            //               context.read<DbcubitCubit>().insertModel(objModel);
+            //               Navigator.of(context).pop();
+            //               _name.clear();
+            //               _quantity.clear();
+            //               var snackBar =
+            //                   const SnackBar(content: Text("data inserted"));
+            //               ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            //             },
+            //           )
+            //         ],
+            //       );
+            //     });
+          }),
+    );
+  }
+}
+_displayDialog(BuildContext context) async {
+  TextEditingController _name = TextEditingController();
+  TextEditingController _quantity = TextEditingController();
+  return showDialog(
+      context: context,
+      builder: (context1) {
+        return AlertDialog(
                     title: const Text('TextField AlertDemo'),
                     content: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -198,8 +244,5 @@ class MyHomePage extends StatelessWidget {
                       )
                     ],
                   );
-                });
-          }),
-    );
-  }
+      });
 }

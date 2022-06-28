@@ -1,0 +1,32 @@
+{
+  "auditEntity": [
+    {
+      "AuditEntityId": 2832,
+      "AuditId": 82,
+      "AuditEntityName": "India",
+      "AuditEntityTypeId": 893,
+      "AuditParentEntityId": 0,
+      "SequenceNo": 1,
+      "EntityEndDate": "2021-11-15T11:29:03",
+      "IsLeafNode": false,
+      "BarcodeNFC": "1593549198",
+      "EntityLevel": 1,
+      "EntityException": false,
+      "ScheduleOccurrenceIds": "304"
+    },
+    {
+      "AuditEntityId": 2833,
+      "AuditId": 82,
+      "AuditEntityName": "Gujarat",
+      "AuditEntityTypeId": 894,
+      "AuditParentEntityId": 2832,
+      "SequenceNo": 2,
+      "EntityEndDate": "2021-11-15T11:28:58",
+      "IsLeafNode": false,
+      "BarcodeNFC": "2124586738",
+      "EntityLevel": 2,
+      "EntityException": false,
+      "ScheduleOccurrenceIds": "304"
+    }
+  ]
+}

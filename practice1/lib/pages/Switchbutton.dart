@@ -25,8 +25,8 @@ class SwitchButton extends StatelessWidget {
                     print('this is value $value');
                   }
                   //isswitch = value;
-                  // whenever switch is on then pressed button it called on changed and value became FALSE  ON
-                  // whenever switch is off then pressed button it called on changed and value became TRUE  OFF
+                  // whenever switch is on then pressed button it called on changed and value became FALSE
+                  // whenever switch is off then pressed button it called on changed and value became TRUE
 
                   context.read<SwitchButtonCubit>().toggleSwitch(value);
                 },
@@ -44,6 +44,42 @@ class SwitchButton extends StatelessWidget {
             style: TextStyle(fontSize: 20),
           )
         ]),
+      ),
+    );
+  }
+}
+
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key}) : super(key: key);
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final txtController = TextEditingController();
+  String onchangeval = "";
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TextFormField(
+                onChanged: (value) {
+                  setState(() {
+                    onchangeval = value;
+                  });
+                },
+                controller: txtController),
+            Text(
+              onchangeval,
+            ),
+          ],
+        ),
       ),
     );
   }

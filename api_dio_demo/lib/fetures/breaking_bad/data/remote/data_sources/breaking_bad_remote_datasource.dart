@@ -1,6 +1,7 @@
 import 'package:api_dio_demo/core/error/exception.dart';
 import 'package:api_dio_demo/core/error/failure.dart';
 import 'package:api_dio_demo/fetures/breaking_bad/data/model/QuoteModel.dart';
+import 'package:api_dio_demo/utils/constant.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
@@ -18,7 +19,7 @@ class BreakingBadRemoteDatasourceImpl implements BreakingBadRemoteDatasource {
     print('datasource');
     try {
       final response =
-          await apiclient.get('https://www.breakingbadapi.com/api/quotes');
+          await apiclient.get('${Constant.baseurl}/api/quotes');
       if (response.statusCode == 200) {
         final List<QuoteModel>quateslist = [];
         final jsonlist = response.data;
@@ -41,8 +42,16 @@ class BreakingBadRemoteDatasourceImpl implements BreakingBadRemoteDatasource {
     } catch (exception) {
        throw ServerException(exception.toString());
     }
-    // return Left(ServerException('Exception'));
+
   }
+
+
+
+
+
+
+
+
 
 
 }

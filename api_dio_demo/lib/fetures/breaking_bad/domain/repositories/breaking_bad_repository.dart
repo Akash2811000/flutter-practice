@@ -3,4 +3,6 @@ import 'package:api_dio_demo/fetures/breaking_bad/data/model/QuoteModel.dart';
 import 'package:dartz/dartz.dart';
 abstract class BreakingBadRepository{
   Future<Either<Failure,List<QuoteModel>>> getQuatos();
+
+
 }

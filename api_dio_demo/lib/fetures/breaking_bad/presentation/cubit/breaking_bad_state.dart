@@ -5,6 +5,12 @@ abstract class BreakingBadState {}
 
 class BreakingBadInitial extends BreakingBadState {}
 
-class BreakingBadSuccess extends BreakingBadState {}
+class BreakingBadQuoteSuccess extends BreakingBadState {
+  final List<QuoteModel> quotlist;
+
+  BreakingBadQuoteSuccess(this.quotlist);
+}
 
 class BreakingBadFail extends BreakingBadState {}
+
+class BreakingBadQuoteLoader extends BreakingBadState {}

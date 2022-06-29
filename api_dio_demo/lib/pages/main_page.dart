@@ -1,3 +1,4 @@
+import 'package:api_dio_demo/fetures/breaking_bad/presentation/pages/quaotes_page.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 class MyHomePage extends StatelessWidget {
@@ -19,7 +20,10 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-      child : ElevatedButton(onPressed: (){getHttp();},child: Text("quots")))
+      child : ElevatedButton(onPressed: (){
+        //getHttp();
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => QuaotesPage()));
+        },child: Text("quots")))
     );
   }
 }

@@ -1,7 +1,17 @@
-import 'package:api_dio_demo/pages/main_page.dart';
-import 'package:flutter/material.dart';
 
-void main() {
+import 'package:api_dio_demo/fetures/breaking_bad/presentation/cubit/breaking_bad_cubit.dart';
+import 'package:api_dio_demo/fetures/breaking_bad/presentation/pages/home_page.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+
+import 'injection_contaner.dart' as di;
+import 'injection_contaner.dart';
+
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
   runApp(const MyApp());
 }
 
@@ -18,7 +28,11 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: BlocProvider(
+        create: (context) => sl<BreakingBadCubit>(),
+         child: MyHomePage(),
+
+      ),
     );
   }
 }

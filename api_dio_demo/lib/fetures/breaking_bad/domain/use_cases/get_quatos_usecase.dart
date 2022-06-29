@@ -6,11 +6,13 @@ import 'package:dartz/dartz.dart';
 
 class GetQuatosUsecase extends UseCase<List<QuoteModel>,NoParams>{
   final BreakingBadRepository breakingBadRepository;
-
-  GetQuatosUsecase(this.breakingBadRepository);
+   GetQuatosUsecase(this.breakingBadRepository);
   @override
   Future<Either<Failure, List<QuoteModel>>> call(NoParams params) async{
-   return await breakingBadRepository.getQuatos();
+    print('usecase');
+    return await breakingBadRepository.getQuatos();
+
+
   }
 
 

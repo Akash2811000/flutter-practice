@@ -7,6 +7,7 @@ import 'package:dio/dio.dart';
 
 abstract class BreakingBadRemoteDatasource {
   Future< List<QuoteModel>> getQuaoteDatasource();
+  Future<List<QuoteModel>> getQuaoteByidDatasource(int quateid);
 }
 
 class BreakingBadRemoteDatasourceImpl implements BreakingBadRemoteDatasource {
@@ -44,6 +45,37 @@ class BreakingBadRemoteDatasourceImpl implements BreakingBadRemoteDatasource {
     }
 
   }
+
+  @override
+  Future<List<QuoteModel>> getQuaoteByidDatasource(int quateid) async{
+    try {
+      final response =
+      await apiclient.get('${Constant.baseurl}/api/quotes/$quateid');
+      if (response.statusCode == 200) {
+        final List<QuoteModel>quateslist = [];
+        final jsonlist = response.data;
+        for (var item in jsonlist) {
+          quateslist.add(QuoteModel.fromJson(item));
+          print("this is item $item");
+        }
+        print("this is quoteslist $quateslist");
+        return (quateslist);
+      } else {
+        throw SocketException('msg');
+        // return (ServerFailure());
+      }
+    } on DioError catch (error) {
+      if (error.type == DioErrorType.connectTimeout) {
+        throw SocketException(error.message);
+      }else{
+        throw SocketException(error.message);
+      }
+    } catch (exception) {
+      throw ServerException(exception.toString());
+    }
+  }
+
+
 
 
 

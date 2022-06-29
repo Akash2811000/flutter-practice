@@ -1,6 +1,7 @@
 import 'package:api_dio_demo/fetures/breaking_bad/presentation/cubit/breaking_bad_cubit.dart';
 import 'package:api_dio_demo/fetures/breaking_bad/presentation/pages/loding_page.dart';
 import 'package:api_dio_demo/fetures/breaking_bad/presentation/pages/quaotes_page.dart';
+import 'package:api_dio_demo/injection_contaner.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +18,10 @@ class MyHomePage extends StatelessWidget {
             if (state is BreakingBadQuoteSuccess) {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) =>
-                      QuaotesPage(quaotlist: state.quotlist)));
+                      BlocProvider(
+                        create: (context) => sl<BreakingBadCubit>(),
+                        child: QuaotesPage(quaotlist: state.quotlist),
+                      )));
             }
           },
           builder: (context, state) {

@@ -14,14 +14,26 @@ BreakingBadRemoteDatasource breakingBadRemoteDatasource;
   @override
   Future<Either<Failure, List<QuoteModel>>> getQuatos() async {
     print('repo');
-    await breakingBadRemoteDatasource.getQuaoteDatasource();
+    //await breakingBadRemoteDatasource.getQuaoteDatasource();
     try {
      final res = await breakingBadRemoteDatasource.getQuaoteDatasource();
-     print('this is');
-     print(res);
+    
       return Right(res);
     } catch (e) {
-      print('fail rep');
+      
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<QuoteModel>>> getQuatosbyId(int quotid) async{
+    try {
+      final res = await breakingBadRemoteDatasource.getQuaoteByidDatasource(quotid);
+
+
+      return Right(res);
+    } catch (e) {
+      
       return Left(ServerFailure());
     }
   }

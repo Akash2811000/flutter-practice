@@ -14,3 +14,7 @@ class BreakingBadQuoteSuccess extends BreakingBadState {
 class BreakingBadFail extends BreakingBadState {}
 
 class BreakingBadQuoteLoader extends BreakingBadState {}
+
+class serchActive extends BreakingBadState{}
+
+class serchInActive extends BreakingBadState{}

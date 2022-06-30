@@ -4,6 +4,8 @@ import 'package:dartz/dartz.dart';
 abstract class BreakingBadRepository{
   Future<Either<Failure,List<QuoteModel>>> getQuatos();
   Future<Either<Failure,List<QuoteModel>>> getQuatosbyId(int quotid);
+  Future<Either<Failure,List<QuoteModel>>> getQuatosbyRandom();
+  Future<Either<Failure,List<QuoteModel>>> getQuatosbyseries(String seriesname);
 
 
 }

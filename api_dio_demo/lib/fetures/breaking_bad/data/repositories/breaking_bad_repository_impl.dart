@@ -1,5 +1,3 @@
-
-
 import 'package:api_dio_demo/core/error/failure.dart';
 import 'package:api_dio_demo/fetures/breaking_bad/data/model/QuoteModel.dart';
 import 'package:api_dio_demo/fetures/breaking_bad/data/remote/data_sources/breaking_bad_remote_datasource.dart';
@@ -7,7 +5,7 @@ import 'package:api_dio_demo/fetures/breaking_bad/domain/repositories/breaking_b
 import 'package:dartz/dartz.dart';
 
 class BreakingBadRepositoryImpl implements BreakingBadRepository {
-BreakingBadRemoteDatasource breakingBadRemoteDatasource;
+  BreakingBadRemoteDatasource breakingBadRemoteDatasource;
 
   BreakingBadRepositoryImpl(this.breakingBadRemoteDatasource);
 
@@ -16,24 +14,48 @@ BreakingBadRemoteDatasource breakingBadRemoteDatasource;
     print('repo');
     //await breakingBadRemoteDatasource.getQuaoteDatasource();
     try {
-     final res = await breakingBadRemoteDatasource.getQuaoteDatasource();
-    
+      final res = await breakingBadRemoteDatasource.getQuaoteDatasource();
+
       return Right(res);
     } catch (e) {
-      
       return Left(ServerFailure());
     }
   }
 
   @override
-  Future<Either<Failure, List<QuoteModel>>> getQuatosbyId(int quotid) async{
+  Future<Either<Failure, List<QuoteModel>>> getQuatosbyId(int quotid) async {
     try {
-      final res = await breakingBadRemoteDatasource.getQuaoteByidDatasource(quotid);
-
+      final res =
+          await breakingBadRemoteDatasource.getQuaoteByidDatasource(quotid);
 
       return Right(res);
     } catch (e) {
-      
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<QuoteModel>>> getQuatosbyseries(
+      String seriesname) async {
+    try {
+      final res = await breakingBadRemoteDatasource
+          .getQuaoteByseriesDatasource(seriesname);
+
+      return Right(res);
+    } catch (e) {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<QuoteModel>>> getQuatosbyRandom() async{
+
+    try {
+      final res = await breakingBadRemoteDatasource
+          .getQuaoteByRandomDatasource();
+
+      return Right(res);
+    } catch (e) {
       return Left(ServerFailure());
     }
   }

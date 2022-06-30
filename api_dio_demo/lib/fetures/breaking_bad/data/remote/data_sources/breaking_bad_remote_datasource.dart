@@ -8,6 +8,8 @@ import 'package:dio/dio.dart';
 abstract class BreakingBadRemoteDatasource {
   Future< List<QuoteModel>> getQuaoteDatasource();
   Future<List<QuoteModel>> getQuaoteByidDatasource(int quateid);
+  Future<List<QuoteModel>> getQuaoteByRandomDatasource();
+  Future<List<QuoteModel>> getQuaoteByseriesDatasource(String series);
 }
 
 class BreakingBadRemoteDatasourceImpl implements BreakingBadRemoteDatasource {
@@ -73,6 +75,67 @@ class BreakingBadRemoteDatasourceImpl implements BreakingBadRemoteDatasource {
     } catch (exception) {
       throw ServerException(exception.toString());
     }
+  }
+
+  @override
+  Future<List<QuoteModel>> getQuaoteByseriesDatasource(String series) async{
+    print('datasource');
+    try {
+      final response =
+          await apiclient.get('${Constant.baseurl}/api/quotes?series=$series');
+      if (response.statusCode == 200) {
+        final List<QuoteModel>quateslist = [];
+        final jsonlist = response.data;
+        for (var item in jsonlist) {
+          quateslist.add(QuoteModel.fromJson(item));
+          print(item);
+        }
+        print(quateslist);
+        return (quateslist);
+      } else {
+        throw SocketException('msg');
+        // return (ServerFailure());
+      }
+    } on DioError catch (error) {
+      if (error.type == DioErrorType.connectTimeout) {
+        throw SocketException(error.message);
+      }else{
+        throw SocketException(error.message);
+      }
+    } catch (exception) {
+      throw ServerException(exception.toString());
+    }
+  }
+
+  @override
+  Future<List<QuoteModel>> getQuaoteByRandomDatasource() async{
+    print('datasource');
+    try {
+      final response =
+          await apiclient.get('${Constant.baseurl}/api/quotes/random');
+      if (response.statusCode == 200) {
+        final List<QuoteModel>quateslist = [];
+        final jsonlist = response.data;
+        for (var item in jsonlist) {
+          quateslist.add(QuoteModel.fromJson(item));
+          print(item);
+        }
+        print(quateslist);
+        return (quateslist);
+      } else {
+        throw SocketException('msg');
+        // return (ServerFailure());
+      }
+    } on DioError catch (error) {
+      if (error.type == DioErrorType.connectTimeout) {
+        throw SocketException(error.message);
+      }else{
+        throw SocketException(error.message);
+      }
+    } catch (exception) {
+      throw ServerException(exception.toString());
+    }
+
   }
 
 

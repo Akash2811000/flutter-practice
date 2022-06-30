@@ -27,6 +27,7 @@ class BreakingBadCubit extends Cubit<BreakingBadState> {
   }
 
   getQuotesByid(int quoteid) async {
+    print("by id cubit");
     emit(BreakingBadQuoteLoader());
     var res = await getQuoteByIdUsecase.call(IdParams(id: quoteid));
     res.fold((l) {
@@ -40,8 +41,10 @@ class BreakingBadCubit extends Cubit<BreakingBadState> {
   void serch(a){
     if(a==1){
       emit(serchInActive());
+
     }else {
       emit(serchActive());
+
     }
   }
 

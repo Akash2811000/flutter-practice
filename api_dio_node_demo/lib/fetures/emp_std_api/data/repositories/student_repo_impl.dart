@@ -6,20 +6,31 @@ import 'package:dartz/dartz.dart';
 
 class StudentRepoImpl implements StudentRepo{
 
- final StudentDataSourceImpl studentDataSourceImpl;
+ final StudentDataSource studentDataSource;
 
 
- StudentRepoImpl(this.studentDataSourceImpl);
+ StudentRepoImpl(this.studentDataSource);
   @override
   Future<Either<Failure, List<StudentModel>>> getAllStudent() async{
-    // try {
-    //   final res = await studentDataSourceImpl.getAllStudentdatasource();
-    //
-    //   return Right(res);
-    // } catch (e) {
-    //   return Left(ServerFailure());
-    // }
+    try {
+      final res = await studentDataSource.getAllStudentdatasource();
+
+      return Right(res);
+    } catch (e) {
+      return Left(ServerFailure());
+    }
     print("repo impl");
     return Left(ServerFailure());
+  }
+
+  @override
+  Future<Either<Failure, List<StudentModel>>> createstudent(StudentModel studentModel) async{
+    try {
+      final res = await studentDataSource.createStudentDatasource(studentModel);
+
+      return Right(res);
+    } catch (e) {
+      return Left(ServerFailure());
+    }
   }
 }

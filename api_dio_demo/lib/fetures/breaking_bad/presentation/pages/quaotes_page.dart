@@ -13,80 +13,66 @@ class QuaotesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController id = TextEditingController();
+
     return Scaffold(
-      appBar: AppBar(
-        title: BlocBuilder<BreakingBadCubit, BreakingBadState>(
-          builder: (context, state) {
-            if (state is serchActive) {
-              return Text('API Calling');
-            }
-            return TextField(
-              controller: id,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintStyle: TextStyle(color: Colors.grey[800]),
-                  hintText: "Type in your text",
-                  fillColor: Colors.white70),
-            );
-          },
-        ),
-        actions: [
-          BlocBuilder<BreakingBadCubit, BreakingBadState>(
-            builder: (context, state) {
-              print(state);
-              return Row(
-                children: [
-                  state is serchActive
-                      ? IconButton(
-                      onPressed: () {
-                        print('search');
-                        context.read<BreakingBadCubit>().serch(1);
-                      },
-                      icon: Icon(Icons.search_rounded))
-                      : IconButton(
-                      onPressed: () {
-                        print('close');
-                        context.read<BreakingBadCubit>().serch(0);
-                        if (id.text == "") {} else {
-                          print(id.text);
-                          context
-                              .read<BreakingBadCubit>()
-                              .getQuotesByid(
-                              int.parse(id.text));
-                          print("after clicking $state");
-                        }
-                      },
-                      icon: Icon(Icons.arrow_right_outlined)),
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                colors: [
+                  const Color(0xFF3366FF),
+                  const Color(0xFF00CCFF),
                 ],
-              );
-            },
+                begin: const FractionalOffset(0.0, 0.0),
+                end: const FractionalOffset(1.0, 0.0),
+                stops: [0.0, 1.0],
+                tileMode: TileMode.clamp),
           ),
-        ],
-      ),
-      body: BlocBuilder<BreakingBadCubit, BreakingBadState>(
-        builder: (context, state)
-    {
-      if (state is BreakingBadQuoteSuccess){
-        return ListView.builder(
-            itemCount: quaotlist.length,
-            itemBuilder: (context, index) {
-              return Card(
-                child: Column(
-                  children: [
-                    Text(quaotlist[index].quoteId.toString()),
-                    Text(quaotlist[index].quote.toString()),
-                    Text(quaotlist[index].author.toString()),
-                    Text(quaotlist[index].series.toString()),
-                  ],
-                ),
-              );
-            });
-    }else{
-        return Loading();
-      }
-        },
-      ),
+
+          child: ListView.builder(
+              itemCount: quaotlist.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                       Row(children: [
+                         Text("quoteid:",style: TextStyle(fontWeight: FontWeight.w900),),
+                         SizedBox(width: 10),
+                         Text(quaotlist[index].quoteId.toString())
+                       ],) ,
+                        SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Text("quote:",style: TextStyle(fontWeight: FontWeight.w900),),
+                            SizedBox(width: 10),
+                            Expanded(child: Text(quaotlist[index].quote.toString(),)),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Text("author:",style: TextStyle(fontWeight: FontWeight.w900),),
+                            SizedBox(width: 10),
+                            Text(quaotlist[index].author.toString()),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Text("series:",style: TextStyle(fontWeight: FontWeight.w900),),
+                            SizedBox(width: 10),
+                            Text(quaotlist[index].series.toString()),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }),
+        ),
+
+
     );
   }
 }

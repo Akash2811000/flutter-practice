@@ -59,4 +59,15 @@ class BreakingBadRepositoryImpl implements BreakingBadRepository {
       return Left(ServerFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, List<QuoteModel>>> getQuatosbyRandomauther(String seriesname) async{
+    try {
+      final res = await breakingBadRemoteDatasource
+          .getQuaoteRandomByautherDatasource(seriesname);
+      return Right(res);
+    } catch (e) {
+      return Left(ServerFailure());
+    }
+  }
 }

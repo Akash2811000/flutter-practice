@@ -11,6 +11,7 @@ class GetQuoteByRandom extends UseCase<List<QuoteModel>,NoParams>{
 
   @override
   Future<Either<Failure, List<QuoteModel>>> call(NoParams params)async {
+    print("calling random usecase");
     return await breakingBadRepository.getQuatosbyRandom();
   }
 }

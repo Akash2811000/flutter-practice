@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/mydata", () => { console.log("db") })
+mongoose.connect("mongodb://localhost:27017/mydataa", () => { console.log("db") })
 const employeesSchema = mongoose.Schema(
     {
         "EmpId": Number,

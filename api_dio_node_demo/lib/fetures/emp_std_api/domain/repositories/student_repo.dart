@@ -3,5 +3,5 @@ import 'package:api_dio_node_demo/fetures/emp_std_api/data/remote/models/Student
 import 'package:dartz/dartz.dart';
 
 abstract class StudentRepo {
-  Future<Either<Failure,List<StudentModel>>> GetAllStudent();
+  Future<Either<Failure,List<StudentModel>>> getAllStudent();
 }

@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');   
-mongoose.connect('mongodb://localhost:27017/mydata');
+mongoose.connect('mongodb://localhost:27017/mydataa');
 
 const studentSchema =  mongoose.Schema({
     
-        "ID": Number,
+        "StudentId": Number,
         "Name": String,
         "Address": String,
         "Fees": {

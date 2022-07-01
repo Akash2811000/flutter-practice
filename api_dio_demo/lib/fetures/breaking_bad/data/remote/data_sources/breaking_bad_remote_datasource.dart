@@ -26,6 +26,8 @@ class BreakingBadRemoteDatasourceImpl implements BreakingBadRemoteDatasource {
   Future<List<QuoteModel>> getQuaoteDatasource() async {
     try {
       final response = await apiclient.get('${Constant.baseurl}/api/quotes');
+      //final response = await apiclient.get('${Constant.baseurl}api/quotes');
+      print("hello");
       if (response.statusCode == 200) {
         final List<QuoteModel> quateslist = [];
         final jsonlist = response.data;
@@ -35,17 +37,18 @@ class BreakingBadRemoteDatasourceImpl implements BreakingBadRemoteDatasource {
 
         return (quateslist);
       } else {
-        throw SocketException('msg');
-        // return (ServerFailure());
+        // throw SocketException('msg');
+         throw ServerException;
       }
-    } on DioError catch (error) {
+    } on DioError catch (error) {print(error);
+      print('on');
       if (error.type == DioErrorType.connectTimeout) {
+        print('if');
         throw SocketException(error.message);
       } else {
-        throw SocketException(error.message);
+        print('else');
+        throw ServerException(error.message);
       }
-    } catch (exception) {
-      throw ServerException(exception.toString());
     }
   }
 

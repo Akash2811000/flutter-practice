@@ -1,3 +1,4 @@
+import 'package:api_dio_demo/core/error/failure.dart';
 import 'package:api_dio_demo/core/usecase/usecase.dart';
 import 'package:api_dio_demo/fetures/breaking_bad/data/model/QuoteModel.dart';
 import 'package:api_dio_demo/fetures/breaking_bad/domain/use_cases/get_quatoes_by_random_series_usecase.dart';
@@ -26,6 +27,11 @@ class BreakingBadCubit extends Cubit<BreakingBadState> {
     emit(BreakingBadQuoteLoader());
     var res = await getQuatosUsecase.call(NoParams());
     res.fold((l) {
+      print('this is error ${l}');
+      if(l is ServerFailure){
+        l.code;
+        print(l.code);
+      }
       emit(BreakingBadFail());
     }, (r) {
       emit(BreakingBadQuoteSuccess(r));

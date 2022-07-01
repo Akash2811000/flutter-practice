@@ -5,7 +5,7 @@ class NoDataFound extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('No Data Found'),
     );
   }

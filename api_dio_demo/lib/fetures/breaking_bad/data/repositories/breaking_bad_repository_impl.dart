@@ -18,7 +18,7 @@ class BreakingBadRepositoryImpl implements BreakingBadRepository {
 
       return Right(res);
     } catch (e) {
-      return Left(ServerFailure());
+      return Left(ServerFailure(code: 404, message: 'error hello'));
     }
   }
 

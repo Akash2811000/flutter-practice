@@ -13,6 +13,9 @@ class ServerFailure extends Failure {
   });
   final dynamic code;
   final String? message;
+  String ErrorData(){
+    return this.message!;
+  }
 }
 
 class SocketException implements Failure {

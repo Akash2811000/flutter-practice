@@ -2,9 +2,9 @@ import 'package:api_dio_demo/fetures/breaking_bad/presentation/cubit/breaking_ba
 import 'package:api_dio_demo/fetures/breaking_bad/presentation/pages/loding_page.dart';
 import 'package:api_dio_demo/fetures/breaking_bad/presentation/pages/no_data_found_page.dart';
 import 'package:api_dio_demo/fetures/breaking_bad/presentation/pages/quaotes_page.dart';
-import 'package:api_dio_demo/injection_contaner.dart';
+
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -33,45 +33,43 @@ class MyHomePage extends StatelessWidget {
                     fillColor: Colors.white70),
               );
             }
-            return Text('API Calling');
+            return const Text('API Calling');
           },
         ),
         actions: [
           BlocBuilder<BreakingBadCubit, BreakingBadState>(
             builder: (context, state) {
-              print(state);
+
               return Row(
                 children: [
                   state is serchActive
                       ? IconButton(
                           onPressed: () {
-                            print('close');
+
                             context.read<BreakingBadCubit>().serch(0);
-                           context.read<BreakingBadCubit>().getQuotes();
+                            context.read<BreakingBadCubit>().getQuotes();
                           },
-                          icon: Icon(Icons.arrow_right_outlined))
+                          icon: const Icon(Icons.arrow_right_outlined))
                       : IconButton(
                           onPressed: () {
-                            print('search');
-                            print(state);
+
                             context.read<BreakingBadCubit>().serch(1);
                             if (id.text == "") {
-                              // final snackBar =
-                              // SnackBar(content: Text('Please Enter'));
-                              //
-                              // ScaffoldMessenger.of(context)
-                              //     .showSnackBar(snackBar);
+                              const snackBar =
+                              SnackBar(content: Text('Please Enter'));
+
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
                             } else {
-                              print(id.text);
+
                               context
                                   .read<BreakingBadCubit>()
                                   .checkNumStr(id.text);
                               id.clear();
-                              print("after clicking $state");
-                            }
 
+                            }
                           },
-                          icon: Icon(Icons.search_rounded)),
+                          icon: const Icon(Icons.search_rounded)),
                 ],
               );
             },
@@ -81,24 +79,23 @@ class MyHomePage extends StatelessWidget {
       body: Center(child: BlocBuilder<BreakingBadCubit, BreakingBadState>(
         builder: (context, state) {
           if (state is BreakingBadQuoteSuccess) {
-            if(state.quotlist.isEmpty) {
-              return NoDataFound();
-            }else {
+            if (state.quotlist.isEmpty) {
+              return const NoDataFound();
+            } else {
               return QuaotesPage(quaotlist: state.quotlist);
             }
-
           }
 
           if (state is BreakingBadQuoteLoader) {
-            return Loading();
+            return const Loading();
           }
           if (state is BreakingBadFail) {
-            return NoDataFound();
+            return const NoDataFound();
           }
-          if(state is serchActive){
-            return NoDataFound();
-          }else {
-            return NoDataFound();
+          if (state is serchActive) {
+            return const NoDataFound();
+          } else {
+            return const NoDataFound();
           }
           // return ElevatedButton(
           //     onPressed: () {
@@ -133,21 +130,18 @@ class MyHomePage extends StatelessWidget {
       //   ),
       // ),
 
-
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         backgroundColor: Colors.blue,
         onPressed: () {
-          if(id.text.isEmpty) {
+          if (id.text.isEmpty) {
             context.read<BreakingBadCubit>().getQuoteByrandom();
-          }
-          else {
+          } else {
             context.read<BreakingBadCubit>().getQuotesSeriesByranom(id.text);
           }
         },
       ),
-
     );
   }
 }

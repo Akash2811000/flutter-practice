@@ -5,4 +5,6 @@ import 'package:dartz/dartz.dart';
 abstract class StudentRepo {
   Future<Either<Failure,List<StudentModel>>> getAllStudent();
   Future<Either<Failure,List<StudentModel>>> createstudent(StudentModel studentModel);
+  Future<Either<Failure,List<StudentModel>>> updatetudentrepo(StudentModel studentModel,int studentid);
+  Future<Either<Failure,List<StudentModel>>> deletestudentrepo(int studentid);
 }

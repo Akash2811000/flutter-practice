@@ -10,3 +10,4 @@ class StddataSucess extends StddataState {
   StddataSucess(this.studenlist);
 }
 class StddataFail extends StddataState {}
+class StddataLoading extends StddataState {}

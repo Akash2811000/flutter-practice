@@ -65,7 +65,7 @@ class StudentDomain {
 
   deleteStudent(req, res) {
     var id = req.params.studentId
-    var query = { ID: id };
+    var query = { StudentId: id };
     studentmodel.find(query, { Fees: 1, _id: 0 }, function (err, result) {
       if (result.length == 0) {
         res.send("Data not found");
@@ -82,7 +82,7 @@ class StudentDomain {
     var id = req.params.studentId;
     var name = req.body.name;
     var address = req.body.address;
-    var query = {ID : id}
+    var query = {StudentId : id}
     var newValues = {$set : {Name : name, Address : address}}
     studentmodel.find(query,function(err,result){
       if (result.length == 0) {

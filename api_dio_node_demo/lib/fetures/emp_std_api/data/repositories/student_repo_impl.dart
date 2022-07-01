@@ -33,4 +33,29 @@ class StudentRepoImpl implements StudentRepo{
       return Left(ServerFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, List<StudentModel>>> deletestudentrepo(int studentid) async{
+    try {
+      final res = await studentDataSource.deleteStudentDatasource(studentid);
+
+      return Right(res);
+    } catch (e) {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<StudentModel>>> updatetudentrepo(StudentModel studentModel, int studentid) async{
+
+    try {
+      final res = await studentDataSource.updateStudentDatasource(studentModel,studentid);
+
+      return Right(res);
+    } catch (e) {
+      return Left(ServerFailure());
+    }
+  }
+
+
 }

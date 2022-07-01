@@ -1,5 +1,6 @@
 import 'package:api_dio_node_demo/fetures/emp_std_api/data/remote/models/StudentModel.dart';
 import 'package:api_dio_node_demo/fetures/emp_std_api/presentation/cubit/stddata_cubit.dart';
+import 'package:api_dio_node_demo/fetures/emp_std_api/presentation/pages/alert_dailog_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -92,49 +93,9 @@ class StudentListPage extends StatelessWidget {
                             showDialog(
                                 context: context,
                                 builder: (BuildContext context2) {
-                                  return AlertDialog(
-                                    title: const Text('Update data'),
-                                    content: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        TextField(
-                                          controller: _name,
-                                          decoration: const InputDecoration(
-                                              hintText: "Name"),
-                                        ),
-                                        TextField(
-                                          controller: _id,
-                                          decoration: const InputDecoration(
-                                              hintText: "address"),
-                                        ),
-                                      ],
-                                    ),
-                                    actions: <Widget>[
-                                      ElevatedButton(
-                                        child: const Text('SUBMIT'),
-                                        onPressed: () {
-                                          StudentModel s = StudentModel(
-                                              name: _name.text,
-                                              address: _id.text);
-                                          context
-                                              .read<StddataCubit>()
-                                              .updateStudent(
-                                                  s,
-                                                  int.parse(studentlist[index]
-                                                      .studentId
-                                                      .toString()));
-
-                                          Navigator.of(context).pop();
-                                          _name.clear();
-                                          _id.clear();
-                                          var snackBar = const SnackBar(
-                                              content: Text("data inserted"));
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(snackBar);
-                                        },
-                                      )
-                                    ],
-                                  );
+                                  return AlertViewPage(_name, _id, (s) {
+                                    context.read<StddataCubit>().updateStudent(s, int.parse(studentlist[index].studentId.toString()));
+                                  });
                                 });
                           },
                           icon: Icon(Icons.edit)),

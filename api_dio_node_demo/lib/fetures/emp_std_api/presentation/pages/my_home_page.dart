@@ -1,5 +1,7 @@
 import 'package:api_dio_node_demo/fetures/emp_std_api/data/remote/models/StudentModel.dart';
 import 'package:api_dio_node_demo/fetures/emp_std_api/presentation/cubit/stddata_cubit.dart';
+import 'package:api_dio_node_demo/fetures/emp_std_api/presentation/pages/alert_dailog_page.dart';
+import 'package:api_dio_node_demo/fetures/emp_std_api/presentation/pages/alert_insert_page.dart';
 import 'package:api_dio_node_demo/fetures/emp_std_api/presentation/pages/no_data_found_page.dart';
 import 'package:api_dio_node_demo/fetures/emp_std_api/presentation/pages/student_list_page.dart';
 import 'package:flutter/material.dart';
@@ -59,51 +61,15 @@ class MyHomePage extends StatelessWidget {
         onPressed: () {
           TextEditingController _name = TextEditingController();
           TextEditingController _id = TextEditingController();
+          TextEditingController _address = TextEditingController();
           print('click');
           showDialog(
               context: context,
               builder: (BuildContext context2) {
-                return AlertDialog(
-                  title: const Text(
-                      'TextField AlertDemo'),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextField(
-                        controller: _name,
-                        decoration:
-                        const InputDecoration(
-                            hintText: "Name"),
-                      ),
-                      TextField(
-                        controller: _id,
-                        decoration:
-                        const InputDecoration(
-                            hintText:
-                            "ID"),
-                      ),
-                    ],
-                  ),
-                  actions: <Widget>[
-                    ElevatedButton(
-                      child: const Text('SUBMIT'),
-                      onPressed: () {
-                        StudentModel s = StudentModel(name:_name.text,studentId: int.parse(_id.text));
-                           context.read<StddataCubit>().createstudent(s);
-
-                        Navigator.of(context).pop();
-                        _name.clear();
-                        _id.clear();
-                        var snackBar = const SnackBar(
-                            content: Text(
-                                "data inserted"));
-                        ScaffoldMessenger.of(
-                            context)
-                            .showSnackBar(snackBar);
-                      },
-                    )
-                  ],
-                );
+                return AlertInsPage(_id, _name, _address, (id, name, address) {
+                  StudentModel s = StudentModel(studentId:id , name: name, address: address );
+                  context.read<StddataCubit>().createstudent(s);
+                });
               });
         },
       ),

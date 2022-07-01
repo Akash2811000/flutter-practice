@@ -24,10 +24,60 @@ class MyHomePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Colors.green,
+        // onPressed: () {
+        //   //context.read<StddataCubit>().getAllStudent();
+        //   StudentModel s = StudentModel(name:"sky gupta",studentId: 37);
+        //   context.read<StddataCubit>().createstudent(s);
+        // },
         onPressed: () {
-          //context.read<StddataCubit>().getAllStudent();
-          StudentModel s = StudentModel(name:"sky gupta",studentId: 37);
-          context.read<StddataCubit>().createstudent(s);
+          TextEditingController _name = TextEditingController();
+          TextEditingController _id = TextEditingController();
+          print('click');
+          showDialog(
+              context: context,
+              builder: (BuildContext context2) {
+                return AlertDialog(
+                  title: const Text(
+                      'TextField AlertDemo'),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TextField(
+                        controller: _name,
+                        decoration:
+                        const InputDecoration(
+                            hintText: "Name"),
+                      ),
+                      TextField(
+                        controller: _id,
+                        decoration:
+                        const InputDecoration(
+                            hintText:
+                            "ID"),
+                      ),
+                    ],
+                  ),
+                  actions: <Widget>[
+                    ElevatedButton(
+                      child: const Text('SUBMIT'),
+                      onPressed: () {
+                        StudentModel s = StudentModel(name:_name.text,studentId: int.parse(_id.text));
+                           context.read<StddataCubit>().createstudent(s);
+
+                        Navigator.of(context).pop();
+                        _name.clear();
+                        _id.clear();
+                        var snackBar = const SnackBar(
+                            content: Text(
+                                "data inserted"));
+                        ScaffoldMessenger.of(
+                            context)
+                            .showSnackBar(snackBar);
+                      },
+                    )
+                  ],
+                );
+              });
         },
       ),
 

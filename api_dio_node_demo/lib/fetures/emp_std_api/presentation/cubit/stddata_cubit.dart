@@ -30,6 +30,7 @@ class StddataCubit extends Cubit<StddataState> {
     res.fold((l) {
       emit(StddataFail());
     }, (r) {
+      print('rhis crestd ${r.toString()}');
       emit(StddataSucess(r));
     });
   }

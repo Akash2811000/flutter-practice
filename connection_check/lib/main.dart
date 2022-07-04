@@ -1,10 +1,7 @@
-
-
 import 'package:connection_check/cubit/connection_cubit.dart';
 import 'package:connection_check/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 
 
 void main() {
@@ -24,8 +21,7 @@ class MyApp extends StatelessWidget {
       ),
 
       home: BlocProvider(
-        create: (context) => ConnectionCubit()
-        ..updateConnectionStatus(),
+        create: (context) => ConnectionCubit(),
         child: MyHomePage(),
       ),
     );

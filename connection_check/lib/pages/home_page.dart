@@ -7,22 +7,47 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-          child:
-          BlocListener<ConnectionCubit, ConnectioncheckState>(
-            listener: (context, state) {
-              print(state);
-              if(state is ConnectionSucess){
-                Scaffold.of(context).showSnackBar(SnackBar( content: Text('Connected!!! :)'),));
-              }
-              if(state is ConnectionFail){
-                Scaffold.of(context).showSnackBar(SnackBar( content: Text('Data is Not Connected!!! :('),));
-              }
-            },
-            child: ElevatedButton(onPressed: (){},child: Text("hello"),),
-      ),
-      )
+    return BlocBuilder<ConnectionCubit, ConnectioncheckState>(
+
+      builder: (context, state) {
+        if(state is ConnectionSucess){
+          return connected();
+        }else{
+          return disconnected();
+        }
+      },
     );
   }
 }
+
+class connected extends StatelessWidget {
+  const connected({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: Center(
+        child: Text("connected"),
+
+      ),
+    );
+  }
+}
+
+
+class disconnected extends StatelessWidget {
+  const disconnected({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: Center(
+        child: Text("disconnected"),
+
+      ),
+    );
+  }
+}
+
